@@ -26,6 +26,17 @@ Invoer-syntax: `. taak`, `o afspraak`, `- notitie`, `* ` ervoor = prioriteit.
 ## Schermen
 Dag (met banner voor open taken van eerdere dagen), Maand (met items uit Toekomst), Toekomst (6 maanden), Opruimen (migratie-review).
 
-## Werkafspraken
-- Geen achtergrondprocessen starten; alleen doen wat besproken is.
-- Schema-wijzigingen via Supabase-migraties, niet met losse SQL.
+## GitHub
+- Repo `Bullet-journal` onder account `UMCD-Bert` → live op https://umcd-bert.github.io/Bullet-journal/ (nog aan te maken en te pushen; staat op dit moment alleen lokaal in git).
+- GitHub Pages vereist de letterlijke bestandsnaam `index.html`.
+
+## Werkafspraken — ALTIJD aanhouden (zelfde als de andere apps)
+1. Wacht op expliciete GO voordat je gaat coderen, ook bij kleine instructies. Wensen die één voor één binnenkomen alleen loggen tot "ga bouwen".
+2. SQL-wijzigingen eerst als los, copy-pastebaar blok tonen en om goedkeuring vragen; na akkoord uitvoeren via de Supabase MCP-connector. Leg elke wijziging ook vast in `supabase/`.
+3. Na elke niet-triviale JS-wijziging een korte smoke-test; testregels direct weer opruimen.
+4. Geen achtergrondprocessen starten; alleen doen wat besproken is.
+5. Bij wijzigingen aan de app-schil (`index.html`, `vendor/`, iconen, manifest): `VERSION` in `sw.js` ophogen, anders zien geïnstalleerde apps de wijziging niet.
+
+## Status
+- v1: Dag, Maand, Toekomst, Opruimen; inloggen met e-mail + wachtwoord; PWA. Tabel `bujo_entries` is aangemaakt in Huishouden (zie `supabase/`).
+- Nog te doen: repo op GitHub + Pages aanzetten, account aanmaken in de app, live testen (ook op het werknetwerk en iPhone).
