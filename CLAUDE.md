@@ -27,7 +27,8 @@ Invoer-syntax: `. taak`, `o afspraak`, `- notitie`, `* ` ervoor = prioriteit.
 Dag (met banner voor open taken van eerdere dagen), Maand (met items uit Toekomst), Toekomst (6 maanden), Opruimen (migratie-review).
 
 ## GitHub
-- Repo `Bullet-journal` onder account `UMCD-Bert` → live op https://umcd-bert.github.io/Bullet-journal/ (nog aan te maken en te pushen; staat op dit moment alleen lokaal in git).
+- Repo `Bullet-journal` onder account `UMCD-Bert` → live op https://umcd-bert.github.io/Bullet-journal/ (aangemaakt en Pages aangezet op 31-10-2026, branch `main`, root).
+- Een nieuwe openbare repo aanmaken blokkeert de auto-modus van Claude; dat commando voert Bert zelf uit (Run-knop). Pushen naar een bestaande repo mag Claude gewoon.
 - GitHub Pages vereist de letterlijke bestandsnaam `index.html`.
 
 ## Werkafspraken — ALTIJD aanhouden (zelfde als de andere apps)
@@ -39,4 +40,5 @@ Dag (met banner voor open taken van eerdere dagen), Maand (met items uit Toekoms
 
 ## Status
 - v1: Dag, Maand, Toekomst, Opruimen; inloggen met e-mail + wachtwoord; PWA. Tabel `bujo_entries` is aangemaakt in Huishouden (zie `supabase/`).
-- Nog te doen: repo op GitHub + Pages aanzetten, account aanmaken in de app, live testen (ook op het werknetwerk en iPhone).
+- Repo op GitHub + Pages: gedaan (31-10-2026).
+- Nog te doen: account aanmaken in de app, live testen (ook op het werknetwerk en iPhone).
