@@ -77,6 +77,18 @@ h3.cap{text-transform:none;font-size:15px;color:var(--ink)}
 .auth .primary{width:100%}
 .auth .link{display:block;margin:8px auto 0}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;max-width:90%;z-index:20}
+.hlp-nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:6px 0 18px;font-size:14px}
+.hlp-nav a{color:var(--accent);text-decoration:none}
+.hlp h3{margin:26px 0 8px;font-size:18px}
+.hlp h4{margin:16px 0 6px;font-size:15px}
+.hlp p,.hlp li{line-height:1.55;font-size:15px}
+.hlp ul{padding-left:20px;margin:6px 0}
+.hlp code{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:var(--line);padding:1px 5px;border-radius:4px}
+.hlp table{border-collapse:collapse;width:100%;font-size:15px}
+.hlp td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.hlp td.sym{width:28px;text-align:center;font-weight:700;font-size:18px;color:var(--accent)}
+.hlp td.inv{white-space:nowrap;color:var(--dim);font-family:ui-monospace,Menlo,monospace;font-size:13px}
+.hlp .tip{background:var(--line);border-radius:10px;padding:10px 14px;margin:10px 0}
 </style>
 </head>
 <body>
@@ -350,6 +362,100 @@ function authView() {
   }, el('h1', {}, 'Bullet Journal'), el('p', {}, 'Log in om je journal te openen.'), email, pw, go, sw);
 }
 
+/* ---------- help (zelfde inhoud als de native app: BulletJournal/Help/HelpInhoud.swift) ---------- */
+const HELP = [
+  ['wat', 'Wat is een bullet journal?', [
+    ['p', 'Een bullet journal is een eenvoudig systeem om je hoofd leeg te maken. Je schrijft alles **kort** op, kijkt er **regelmatig** naar terug en kiest **bewust** wat echt aandacht verdient.'],
+    ['p', 'Het werkt met drie gewoontes:'],
+    ['ul', ['**Snel noteren**: één korte regel per punt, met een teken ervoor dat zegt wat het is.',
+            '**Ordenen in logs**: een dag, een maand en de toekomst.',
+            '**Migreren**: open taken bewust doorschuiven, inplannen of schrappen.']],
+    ['p', 'Het is geen agenda en geen dagboek, maar een plek waar alles samenkomt. Het werkt alleen als je erin terugkijkt.'],
+    ['tip', 'Deze app volgt dezelfde regels als een papieren bullet journal. Alles wat je hier leest, geldt ook op papier.']]],
+  ['tekens', 'De tekens', [
+    ['p', 'Elke regel begint met een teken. Zo zie je in één oogopslag wat iets is en hoe het ervoor staat.'],
+    ['tekens', [['•', 'Taak: iets wat je moet doen', '. tekst'], ['✕', 'Taak gedaan', 'tik op •'],
+      ['>', 'Doorgeschoven naar een andere dag of maand', 'via ⋯'], ['<', 'Ingepland voor later (Toekomst)', 'via ⋯'],
+      ['○', 'Afspraak of gebeurtenis', 'o tekst'], ['–', 'Notitie: idee, gedachte, informatie', '- tekst'],
+      ['*', 'Prioriteit (zet het vóór een ander teken)', '* . tekst']]],
+    ['p', 'Een **doorgestreepte** taak is geannuleerd: die doet er niet meer toe.'],
+    ['h', 'Invoeren'],
+    ['p', 'Typ in het invoerveld en druk op Enter of op **Voeg toe**. De eerste tekens bepalen de soort:'],
+    ['ul', ['`. Offerte nabellen` → taak', '`o 14:00 tandarts` → afspraak', '`- Idee voor de vakantie` → notitie', '`* . Belastingaangifte` → taak met prioriteit']],
+    ['p', 'Typ je geen teken, dan geldt de soort die links naast het veld is gekozen (•, ○ of –).']]],
+  ['schermen', 'De vier schermen', [
+    ['h', 'Dag'],
+    ['p', 'Je werkblad voor vandaag. Alles wat binnenkomt zet je hier: taken, afspraken en notities. Met ‹ en › blader je naar andere dagen; klik op de datum om er een te kiezen. Staan er nog open taken van eerdere dagen, dan zie je bovenaan een melding.'],
+    ['h', 'Maand'],
+    ['p', 'Het overzicht van de maand: wat er gepland staat en welke taken deze maand moeten gebeuren. Bovenaan staat wat je eerder in Toekomst voor deze maand hebt ingepland. Met **>** neem je het over.'],
+    ['h', 'Toekomst'],
+    ['p', 'Alles wat na deze maand komt: de komende zes maanden. Iets voor maart? Zet het hier onder maart. Als het zover is, zie je het terug in Maand.'],
+    ['h', 'Opruimen'],
+    ['p', 'Hier staan alle open taken van eerdere dagen en maanden. Dit is het moment om te kiezen (zie *Migreren*). Staat er niets meer, dan ben je bij.']]],
+  ['migreren', 'Migreren: de kern', [
+    ['p', 'Migreren is het hart van de methode. Loop je open taken langs en stel bij elke taak eerst één vraag:'],
+    ['tip', '**Is dit nog de moeite waard?**'],
+    ['ul', ['**Nee** → annuleren (doorstrepen). Loslaten is ook afmaken.',
+            '**Ja, binnenkort** → **>** doorschuiven naar vandaag, morgen of deze maand.',
+            '**Ja, maar later** → **<** inplannen in Toekomst, bij de juiste maand.']],
+    ['p', 'Schuif je dezelfde taak steeds door? Kies dan: **nu doen**, **opknippen** in een kleinere stap, of **schrappen**.'],
+    ['h', 'Zo doe je het in de app'],
+    ['ul', ['Open het **⋯-menu** achter een taak: *Naar vandaag/morgen*, *Plan in* (<) of *Annuleren*.',
+            'In **Opruimen** staan naast elke taak twee snelknoppen: **>** (doorschuiven) en **✕** (annuleren).',
+            'De melding bovenaan Dag heeft **> Alles naar vandaag** voor als je alles wilt meenemen.']],
+    ['p', 'Bij doorschuiven blijft de oude regel staan met een **>**, en komt er een kopie op de nieuwe plek. Zo zie je later terug wat je hebt verschoven. Precies zoals op papier.']]],
+  ['ritme', 'Het ritme', [
+    ['ul', ['**Ochtend (5 minuten)**: open Dag. Kijk wat er open staat en zet erbij wat vandaag moet. Geef hooguit drie dingen een **\***.',
+            '**Overdag**: noteer alles wat binnenkomt meteen kort. Niet ordenen, alleen vangen.',
+            '**Avond (5 minuten)**: vink af wat gedaan is. Open taken: doorschuiven, inplannen of annuleren.',
+            '**Eens per maand**: loop **Opruimen** door, kijk in **Maand** wat uit Toekomst komt en zet de nieuwe maand op.']],
+    ['tip', 'Lukt het een dag niet? Geen probleem. Morgen begin je gewoon weer, en Opruimen vangt wat is blijven liggen.']]],
+  ['regels', 'Gouden regels', [
+    ['ul', ['**Kort**: een paar woorden is genoeg. Het is een geheugensteun, geen verslag.',
+            '**Eén plek**: alles hierin, niet verspreid over briefjes en andere apps.',
+            '**Minder is meer**: een korte lijst die af komt verslaat een lange lijst die blijft liggen.',
+            '**Terugkijken** is belangrijker dan opschrijven. Zonder migreren wordt het een vergeetlijst.',
+            '**Niet perfect**: een rommelige dag is prima.',
+            '**Even stilstaan**: noteer af en toe met **–** wat goed ging of wat je opviel.']]]],
+  ['web', 'Zo werkt de webversie', [
+    ['ul', ['**Klik op de bullet** (•) om een taak af te vinken (✕). Nog een keer klikken zet hem weer open.',
+            '**⋯** achter een regel: doorschuiven, inplannen, annuleren, weer openzetten, prioriteit, aanpassen en verwijderen.',
+            'Installeren als app: in Edge of Chrome via het installeer-icoon in de adresbalk; op de iPhone via Deel → Zet op beginscherm. Een bladwijzer werkt ook.']],
+    ['tip', 'De webversie heeft internet nodig om je regels te tonen en op te slaan. De app voor iPhone en Mac werkt ook offline.']]],
+  ['native', 'De app voor iPhone en Mac', [
+    ['p', 'Naast deze webversie is er een echte app voor iPhone, iPad en Mac. Die heeft hetzelfde journal, plus:'],
+    ['ul', ['**Offline werken**: alles staat ook op het toestel en gaat mee zodra er weer internet is.',
+            'De **widget Vandaag** voor het beginscherm of het Mac-bureaublad, waarin je taken kunt afvinken.',
+            'Op de Mac **sneltoetsen**: ⌘1 – ⌘4 voor de schermen, ⌘N voor een nieuwe regel, ⌘? voor de help.']]]],
+  ['account', 'Account en synchronisatie', [
+    ['p', 'De webversie, de app en Budget gebruiken **hetzelfde account**: je e-mailadres met hetzelfde wachtwoord. Wat je hier invoert, staat binnen een minuut in de app, en andersom. Wijzig je dezelfde regel op twee plekken tegelijk, dan wint de laatste wijziging.'],
+    ['h', 'Wachtwoord vergeten'],
+    ['p', 'Kies in de app op het inlogscherm **Wachtwoord vergeten?**. Je krijgt een mail met een link naar deze webversie, waar je een nieuw wachtwoord kiest. Let op: dat geldt dan ook voor Budget.']]]
+];
+const hlpHtml = t => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  .replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+  .replace(/(^|[^*\\])\*([^*\s][^*]*?)\*/g, '$1<em>$2</em>').replace(/\\\*/g, '*');
+function hlpNode(tag, text) { const e = document.createElement(tag); e.innerHTML = hlpHtml(text); return e; }
+function viewHelp(box) {
+  const wrap = el('div', { class: 'hlp' });
+  wrap.append(el('div', { class: 'nav' }, el('button', { onclick: () => { S.tab = 'dag'; reload(); } }, '‹'), el('h2', {}, 'Help')),
+    el('p', { class: 'empty' }, 'Uitleg van de bullet journal-methode en van deze webversie.'),
+    el('nav', { class: 'hlp-nav' }, HELP.map(([id, titel]) => el('a', { href: '#h-' + id, onclick: ev => {
+      ev.preventDefault(); document.getElementById('h-' + id).scrollIntoView({ behavior: 'smooth' }); } }, titel))));
+  for (const [id, titel, blokken] of HELP) {
+    wrap.append(el('h3', { id: 'h-' + id }, titel));
+    for (const [soort, inhoud] of blokken) {
+      if (soort === 'p') wrap.append(hlpNode('p', inhoud));
+      else if (soort === 'h') wrap.append(el('h4', {}, inhoud));
+      else if (soort === 'tip') wrap.append(Object.assign(hlpNode('div', inhoud), { className: 'tip' }));
+      else if (soort === 'ul') wrap.append(el('ul', {}, inhoud.map(t => hlpNode('li', t))));
+      else if (soort === 'tekens') wrap.append(el('table', {}, inhoud.map(([t, b, i]) =>
+        el('tr', {}, el('td', { class: 'sym' }, t), el('td', {}, b), el('td', { class: 'inv' }, i)))));
+    }
+  }
+  box.append(wrap);
+}
+
 /* ---------- hoofdscherm ---------- */
 async function render() {
   $app.replaceChildren();
@@ -357,11 +463,13 @@ async function render() {
   const box = el('div');
   $app.append(
     el('header', {}, el('h1', {}, 'Bullet Journal'),
-      el('button', { class: 'link', onclick: () => db.auth.signOut() }, 'Uitloggen')),
+      el('span', {},
+        el('button', { class: 'link', onclick: () => { S.tab = 'help'; reload(); } }, 'Help'),
+        el('button', { class: 'link', onclick: () => db.auth.signOut() }, 'Uitloggen'))),
     el('div', { class: 'tabs' }, Object.keys(views).map(k =>
       el('button', { class: 'tab' + (S.tab === k ? ' on' : ''), onclick: () => { S.tab = k; reload(); } }, tabNames[k]))),
     box);
-  try { await views[S.tab](box); } catch (err) { toast(err.message); }
+  try { await (S.tab === 'help' ? viewHelp : views[S.tab])(box); } catch (err) { toast(err.message); }
   box.append(el('div', { class: 'legend' }, '•  taak     ✕  gedaan     >  doorgeschoven     <  ingepland', el('br'), '○  afspraak     –  notitie     *  prioriteit'));
   if (S.refocus) { S.refocus = false; const i = box.querySelector('.add input'); if (i) i.focus(); }
 }

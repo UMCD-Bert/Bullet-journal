@@ -1,6 +1,6 @@
 // Service worker: houdt de app-schil offline beschikbaar.
 // Data komt altijd live van Supabase (cross-origin) en wordt hier bewust NIET gecachet.
-const VERSION = 'bujo-v2';
+const VERSION = 'bujo-v3';
 const SHELL = [
   './',
   './index.html',
