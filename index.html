@@ -371,7 +371,26 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
 }
 
 const $app = document.getElementById('app');
+/* ---------- nieuw wachtwoord (resetlink uit "Wachtwoord vergeten" in de native app) ---------- */
+function resetView() {
+  const pw = el('input', { type: 'password', placeholder: 'Nieuw wachtwoord', autocomplete: 'new-password', required: true, minlength: 6 });
+  const go = el('button', { type: 'submit', class: 'primary' }, 'Wachtwoord opslaan');
+  $app.replaceChildren(el('form', {
+    class: 'auth',
+    onsubmit: async ev => {
+      ev.preventDefault();
+      go.disabled = true;
+      const { error } = await db.auth.updateUser({ password: pw.value });
+      go.disabled = false;
+      if (error) { toast(error.message); return; }
+      toast('Je wachtwoord is gewijzigd. Log er ook mee in in de app.');
+      render();
+    }
+  }, el('h1', {}, 'Nieuw wachtwoord'), el('p', {}, 'Kies een nieuw wachtwoord (minstens 6 tekens).'), pw, go));
+  pw.focus();
+}
 db.auth.onAuthStateChange((_event, session) => {
+  if (_event === 'PASSWORD_RECOVERY') { S.user = session ? session.user : null; setTimeout(resetView, 0); return; }
   const user = session ? session.user : null;
   const changed = (user && user.id) !== (S.user && S.user.id);
   S.user = user;

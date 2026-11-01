@@ -25,6 +25,12 @@ Invoer-syntax: `. taak`, `o afspraak`, `- notitie`, `* ` ervoor = prioriteit.
 
 ## Schermen
 Dag (met banner voor open taken van eerdere dagen), Maand (met items uit Toekomst), Toekomst (6 maanden), Opruimen (migratie-review).
+Plus "Nieuw wachtwoord" (`resetView`): verschijnt bij `PASSWORD_RECOVERY`, als iemand de resetlink uit de native app volgt.
+
+## Native app
+- Bert gebruikt deze PWA op de werk-pc; thuis/onderweg de native app (iPhone, iPad, Mac):
+  `~/Documenten/Xcode/Berts Code Base/BulletJournal` (eigen CLAUDE.md). Zelfde tabel, zelfde account.
+- Wijzigingen aan het datamodel of de betekenis van de bullets dus altijd in beide doorvoeren.
 
 ## GitHub
 - Repo `Bullet-journal` onder account `UMCD-Bert` → live op https://umcd-bert.github.io/Bullet-journal/ (aangemaakt en Pages aangezet op 31-10-2026, branch `main`, root).
